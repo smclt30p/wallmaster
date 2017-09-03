@@ -24,11 +24,11 @@ class SettingsModel():
         self.settings.setValue("interests", self.interests);
         self.settings.setValue("delay", self.delay);
 
-    anime = False;
-    people = False;
+    anime = True;
+    people = True;
     general = True;
     nsfw = False;
-    interests = "lenovo";
+    interests = "";
     delay = 0;
 
     instance = None;
