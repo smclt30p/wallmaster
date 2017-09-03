@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 
 class Wallhaven:
 
-    SEARCH_ENDPOINT = "https://alpha.wallhaven.cc/search?q={}&search_image=&categories={}&purity={}&sorting=random&order=desc&ratios=16x9";
+    SEARCH_ENDPOINT = "https://alpha.wallhaven.cc/search?q={}&search_image=&categories={}&purity={}&sorting=random&order=desc&ratios=4x3,5x4,16x9,16x10";
 
     def random(self, search="", people=True, general=True, anime=True, nsfw=False):
         categories = ["0", "0", "0"];
