@@ -1,15 +1,7 @@
-from ctypes import *
-
+import subprocess
 import sys
-
-from PyQt5.QtCore import Q_FLAGS, QTimer
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMenu, QAction
-
-from engine import Engine
-from settings import Settings
-from settings_model import SettingsModel
-
+import time
+import depresolv
 
 class Main():
 
@@ -72,4 +64,33 @@ class Main():
         print("Setting delay to {} minutes".format(delay));
 
 if __name__ == "__main__":
-    Main().main();
+
+    launcher = depresolv.launch_main(["PyQt5", "bs4", "lxml", "requests"])
+
+    if launcher is depresolv.ALL_SATISFIED:
+
+        flag = open("installed", "wb+")
+        flag.close()
+
+        from PyQt5.QtCore import Q_FLAGS, QTimer
+        from PyQt5.QtGui import QIcon
+        from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMenu, QAction
+
+        from engine import Engine
+        from settings import Settings
+        from settings_model import SettingsModel
+
+        Main().main();
+
+    elif launcher is depresolv.INSTALLED_AND_SATISFIED:
+
+        subprocess.Popen([sys.executable, sys.argv])
+        exit(0)
+
+    elif launcher is depresolv.INSTALL_FAILED:
+        print("Some dependencies failed to install! Please report this!")
+
+        # Prevent CMD window from closing
+        while True:
+            time.sleep(1)
+
