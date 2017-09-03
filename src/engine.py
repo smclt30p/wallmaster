@@ -1,6 +1,6 @@
 import ctypes
 
-from PyQt5.QtCore import QThread, QTemporaryDir, pyqtSignal
+from PyQt5.QtCore import QThread, QTemporaryDir, pyqtSignal, QDir
 
 from settings_model import SettingsModel
 from wallheaven import Wallhaven
@@ -29,13 +29,13 @@ class Engine(QThread):
                 print("Pic fetch failed...");
                 return;
 
-            print("Writing pic to file...");
+            print("Writing pic to {}/wp.jpg".format(QDir.temp().path()));
 
-            tempfile = open(self.temp.path() + "/wp.jpg", "wb+");
+            tempfile = open(QDir.temp().path() + "/wp.jpg", "wb+");
             tempfile.write(picBytes);
             tempfile.close();
 
-            ctypes.windll.user32.SystemParametersInfoW(20, 0, self.temp.path() + "/wp.jpg", 0);
+            ctypes.windll.user32.SystemParametersInfoW(20, 0, QDir.temp().path() + "/wp.jpg", 0);
 
             print("Wallpaper changed");
 
