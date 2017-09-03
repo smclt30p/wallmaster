@@ -21,7 +21,7 @@ class Wallhaven:
             purity = "010";
         categories = "".join(categories);
 
-        print("Fetching search...");
+        print("Searching wallpapers");
 
         url = self.SEARCH_ENDPOINT.format(search, categories, purity);
         response = requests.get(url, timeout=20);
@@ -33,24 +33,10 @@ class Wallhaven:
         if (len(data)) == 0:
             raise Exception("No pictures found matching your interest \"{}\".".format(search));
 
-        print("Fetching metadata...");
+        print("Downloading image");
 
-        url = data[randint(0, len(data) - 1)].attrs["href"];
-        response = requests.get(url, timeout=20);
-        if response.status_code != 200:
-            raise Exception("Failed to download the new picture.");
-
-        print("Downloading wallpaper...");
-
-        html = BeautifulSoup(response.text, "lxml");
-        data = html.find_all(attrs={"id":"wallpaper"});
-        if (len(data)) == 0:
-            raise Exception("Image fetch failed: broken code");
-
-        print("Fetching wallpaper...");
-
-        url = "http:" + data[0].attrs["src"];
-        response = requests.get(url, timeout=90);
+        url = data[randint(0, len(data) - 1)].attrs["href"].split("/")[-1];
+        response = requests.get("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-{}.jpg".format(url), timeout=90);
         if response.status_code != 200:
             raise Exception("Wallpaper download failed...");
 

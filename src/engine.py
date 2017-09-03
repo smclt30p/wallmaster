@@ -37,6 +37,8 @@ class Engine(QThread):
 
             ctypes.windll.user32.SystemParametersInfoW(20, 0, self.temp.path() + "/wp.jpg", 0);
 
+            print("Wallpaper changed");
+
         except Exception as ex:
             print("Exception occured: " + str(ex));
             self.error.emit(str(ex));
