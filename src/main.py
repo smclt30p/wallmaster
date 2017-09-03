@@ -6,9 +6,9 @@ from PyQt5.QtCore import Q_FLAGS, QTimer
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMenu, QAction
 
-from src.engine import Engine
-from src.settings import Settings
-from src.settings_model import SettingsModel
+from engine import Engine
+from settings import Settings
+from settings_model import SettingsModel
 
 
 class Main():

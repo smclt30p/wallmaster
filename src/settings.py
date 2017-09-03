@@ -2,8 +2,8 @@ from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QDialog
 
-from src.settings_model import SettingsModel
-from src.settings_ui import Ui_settings_ui
+from settings_model import SettingsModel
+from settings_ui import Ui_settings_ui
 
 class Settings(QDialog):
 

@@ -1,10 +1,9 @@
 import ctypes
 
-import requests
-from PyQt5.QtCore import QThread, QTemporaryFile, QTemporaryDir, pyqtSignal
+from PyQt5.QtCore import QThread, QTemporaryDir, pyqtSignal
 
-from src.settings_model import SettingsModel
-from src.wallheaven import Wallhaven
+from settings_model import SettingsModel
+from wallheaven import Wallhaven
 
 
 class Engine(QThread):
