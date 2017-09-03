@@ -29,7 +29,7 @@ class SettingsModel():
     general = True;
     nsfw = False;
     interests = "";
-    delay = 0;
+    delay = 15;
 
     instance = None;
 
