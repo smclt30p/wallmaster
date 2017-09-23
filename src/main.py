@@ -14,6 +14,7 @@ class Main(object):
         self.engine = Engine();
         self.settings = Settings(flags=Q_FLAGS());
         self.settingsModel = SettingsModel.getSettingsModel();
+        self.gi_initialized = False
 
 
     def main(self):
@@ -49,11 +50,32 @@ class Main(object):
         exit(self.app.exec_());
 
     def handleEngineError(self, error):
+
+        # try to use gnome native notifications
+
+        try:
+            import gi
+            gi.require_version("Notify", "0.7");
+            from gi.repository import Notify
+            if not self.gi_initialized:
+                Notify.init("Wallmaster")
+                self.gi_initialized = True
+            Notify.Notification.new(error).show()
+            return
+        except ImportError:
+            pass
+
+        # fall back to Qt's native baloon
+
         self.icon.showMessage("Wallmaster", error);
 
     def saveAndExit(self):
         self.settings = SettingsModel.getSettingsModel();
         self.settings.save();
+
+        if self.gi_initialized:
+            Notify.uninit()
+
         self.app.exit(0);
 
     def handleNewDelay(self, delay):
