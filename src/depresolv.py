@@ -12,12 +12,12 @@ the app. Only std dependencies
 def getFunctionalPip():
 
     try:
-        subprocess.check_output(["pip"])
-        return "pip"
+        subprocess.check_output(["pip3"])
+        return "pip3"
     except BaseException:
         try:
-            subprocess.check_output(["pip3"])
-            return "pip3"
+            subprocess.check_output(["pip"])
+            return "pip"
         except BaseException:
             print("No operational pip intallation found!")
             return False
