@@ -38,7 +38,7 @@ class Wallhaven:
         url = data[randint(0, len(data) - 1)].attrs["href"].split("/")[-1];
         response = requests.get("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-{}.jpg".format(url), timeout=90);
         if response.status_code != 200:
-            raise Exception("Wallpaper download failed...");
+            raise Exception("Wallpaper download failed with code {}".format(response.status_code));
 
         return response.content;
 
