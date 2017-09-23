@@ -4,6 +4,8 @@ from PyQt5.QtCore import QSettings
 class SettingsModel():
 
     def _bool(self, state):
+        if type(state) is bool:
+            return state;
         if state == "false": return False;
         if state == "true": return True;
 
