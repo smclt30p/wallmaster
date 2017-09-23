@@ -15,7 +15,7 @@ class SettingsModel():
         self.people = self._bool(self.settings.value("people", True));
         self.general = self._bool(self.settings.value("general", True));
         self.nsfw = self._bool(self.settings.value("nsfw", True));
-        self.delay = self.settings.value("delay", 0);
+        self.delay = self.settings.value("delay", 15);
         self.interests = self.settings.value("interests", "");
 
     def save(self):
