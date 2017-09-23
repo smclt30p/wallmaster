@@ -3,52 +3,50 @@ import sys
 import time
 import depresolv
 
-class Main():
+
+class Main(object):
+
+    def __init__(self):
+        self.app = QApplication(sys.argv);
+        self.menu = QMenu();
+        self.icon = QSystemTrayIcon();
+        self.timer = QTimer();
+        self.engine = Engine();
+        self.settings = Settings(flags=Q_FLAGS());
+        self.settingsModel = SettingsModel.getSettingsModel();
+
 
     def main(self):
 
-        self.app = QApplication(sys.argv);
-        self.engine = Engine();
+        # Initialize the wallpaper changer engine
+
         self.engine.error.connect(self.handleEngineError)
+        self.timer.timeout.connect(self.engine.nextWallpaper);
 
-        self.settingsModel = SettingsModel.getSettingsModel();
-        self.settings = Settings(flags=Q_FLAGS());
+        # Initialize the timer
 
-        self.timer = QTimer();
         self.timer.start(self.settingsModel.delay * 60000);
-        self.timer.timeout.connect(self.nextActionHandler);
-
         self.settings.delayChanged.connect(self.handleNewDelay);
 
         print("Changing wallpaper every {} minutes...".format(self.settingsModel.delay));
 
+        # Initialize the menu and taskbar icon
+
         settingsAction = QAction("Settings");
         nextAction = QAction("Next Wallpaper");
         exitAction = QAction("Exit");
-
         exitAction.triggered.connect(self.saveAndExit);
-        nextAction.triggered.connect(self.nextActionHandler);
-        settingsAction.triggered.connect(self.settingsActionHandler);
-
-        menu = QMenu();
-        menu.addAction(settingsAction);
-        menu.addAction(nextAction);
-        menu.addSeparator();
-        menu.addAction(exitAction);
-
-        self.icon = QSystemTrayIcon();
+        nextAction.triggered.connect(self.engine.nextWallpaper);
+        settingsAction.triggered.connect(self.settings.show);
+        self.menu.addAction(settingsAction);
+        self.menu.addAction(nextAction);
+        self.menu.addSeparator();
+        self.menu.addAction(exitAction);
         self.icon.setIcon(QIcon("icon.png"));
-        self.icon.setContextMenu(menu);
+        self.icon.setContextMenu(self.menu);
         self.icon.show();
 
         exit(self.app.exec_());
-
-    def settingsActionHandler(self):
-        self.settings.show();
-
-    def nextActionHandler(self):
-        print("Next...");
-        self.engine.nextWallpaper();
 
     def handleEngineError(self, error):
         self.icon.showMessage("Wallmaster", error);
@@ -62,6 +60,7 @@ class Main():
         self.timer.stop();
         self.timer.start(delay * 60000);
         print("Setting delay to {} minutes".format(delay));
+
 
 if __name__ == "__main__":
 
@@ -93,4 +92,3 @@ if __name__ == "__main__":
         # Prevent CMD window from closing
         while True:
             time.sleep(1)
-
