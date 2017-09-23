@@ -20,7 +20,7 @@ class Main(object):
 
         # Initialize the wallpaper changer engine
 
-        self.engine.error.connect(self.handleEngineError)
+        self.engine.error.connect(self.icon.showMessage)
         self.timer.timeout.connect(self.engine.nextWallpaper);
 
         # Initialize the timer
@@ -47,9 +47,6 @@ class Main(object):
         self.icon.show();
 
         exit(self.app.exec_());
-
-    def handleEngineError(self, error):
-        self.icon.showMessage("Wallmaster", error);
 
     def saveAndExit(self):
         self.settings = SettingsModel.getSettingsModel();
