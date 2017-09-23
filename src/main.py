@@ -65,7 +65,7 @@ class Main():
 
 if __name__ == "__main__":
 
-    launcher = depresolv.launch_main(["PyQt5", "bs4", "lxml", "requests"])
+    launcher = depresolv.launch_main(["PyQt5", "bs4", "lxml", "requests"], posixdeps=["pygobject"])
 
     if launcher is depresolv.ALL_SATISFIED:
 

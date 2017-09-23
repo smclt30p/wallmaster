@@ -71,7 +71,10 @@ class DependencyResolver():
         else: return ALL_SATISFIED
 
 
-def launch_main(deps):
+def launch_main(deps, posixdeps=[]):
+
+        for dep in posixdeps:
+            print("WARNING: POSIX dependency: {}".format(dep))
 
         print("Resolving runtime dependencies, please wait...\n\n")
         resolver = DependencyResolver()
