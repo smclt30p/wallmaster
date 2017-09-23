@@ -1,5 +1,6 @@
 import importlib
 import subprocess
+import os
 
 """
 Depresolv is a system that is constructed to prevent
@@ -37,6 +38,10 @@ class DependencyResolver():
         self.dependencies = dependencies
 
     def resolve(self):
+
+        if os.name == "posix":
+            print("Running on POSIX system, install dependencies via the native package manager!")
+            return ALL_SATISFIED
 
         installed_something = False
 
