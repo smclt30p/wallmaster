@@ -1,4 +1,5 @@
-import ctypes
+import platform
+import subprocess
 
 from PyQt5.QtCore import QThread, QTemporaryDir, pyqtSignal, QDir
 
@@ -34,8 +35,7 @@ class Engine(QThread):
             tempfile = open(QDir.temp().path() + "/wp.jpg", "wb+");
             tempfile.write(picBytes);
             tempfile.close();
-
-            ctypes.windll.user32.SystemParametersInfoW(20, 0, QDir.temp().path() + "/wp.jpg", 0);
+            self.change_wallpaper()
 
             print("Wallpaper changed");
 
@@ -49,3 +49,14 @@ class Engine(QThread):
             print("tmp dir not valid...");
             return;
         self.start();
+
+    def change_wallpaper(self):
+
+        if platform.system() == "Linux":
+            if subprocess.check_call(["gsettings", "set", "org.gnome.desktop.background", "picture-uri", "file:///tmp/wp.jpg"]) != 0:
+                raise Exception("Wallpaper setting failed!")
+            return
+        if platform.system() == "Windows":
+            import ctypes
+            ctypes.windll.user32.SystemParametersInfoW(20, 0, QDir.temp().path() + "/wp.jpg", 0);
+            pass
