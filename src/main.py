@@ -1,95 +1,31 @@
+#
+# Copyright (c) 2017 Ognjen Galić
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice,
+#    this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright
+#    notice, this list of conditions and the following disclaimer in the
+#    documentation and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE-
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+
 import subprocess
 import sys
 import time
 import depresolv
-
-
-class Main(object):
-
-    def __init__(self):
-        self.app = QApplication(sys.argv);
-        self.menu = QMenu();
-        self.icon = QSystemTrayIcon();
-        self.timer = QTimer();
-        self.engine = Engine();
-        self.settings = Settings(flags=Q_FLAGS());
-        self.settingsModel = SettingsModel.getSettingsModel();
-        self.gi_initialized = False
-
-
-    def main(self):
-
-        # Initialize the stylesheet
-
-        stylesheet = open("stylesheet.css", "r")
-        stylesheet_str = stylesheet.read()
-        stylesheet.close()
-        self.app.setStyleSheet(stylesheet_str)
-
-        # Initialize the wallpaper changer engine
-
-        self.engine.error.connect(self.handleEngineError)
-        self.timer.timeout.connect(self.engine.nextWallpaper);
-
-        # Initialize the timer
-
-        self.timer.start(self.settingsModel.delay * 60000);
-        self.settings.delayChanged.connect(self.handleNewDelay);
-
-        print("Changing wallpaper every {} minutes...".format(self.settingsModel.delay));
-
-        # Initialize the menu and taskbar icon
-
-        settingsAction = QAction("Settings");
-        nextAction = QAction("Next Wallpaper");
-        exitAction = QAction("Exit");
-        exitAction.triggered.connect(self.saveAndExit);
-        nextAction.triggered.connect(self.engine.nextWallpaper);
-        settingsAction.triggered.connect(self.settings.show);
-        self.menu.addAction(settingsAction);
-        self.menu.addAction(nextAction);
-        self.menu.addSeparator();
-        self.menu.addAction(exitAction);
-        self.icon.setIcon(QIcon("icon.png"));
-        self.icon.setContextMenu(self.menu);
-        self.icon.show();
-
-        exit(self.app.exec_());
-
-    def handleEngineError(self, error):
-
-        # try to use gnome native notifications
-
-        try:
-            import gi
-            gi.require_version("Notify", "0.7");
-            from gi.repository import Notify
-            if not self.gi_initialized:
-                Notify.init("Wallmaster")
-                self.gi_initialized = True
-            Notify.Notification.new(error).show()
-            return
-        except ImportError:
-            pass
-
-        # fall back to Qt's native baloon
-
-        self.icon.showMessage("Wallmaster", error);
-
-    def saveAndExit(self):
-        self.settings = SettingsModel.getSettingsModel();
-        self.settings.save();
-
-        if self.gi_initialized:
-            Notify.uninit()
-
-        self.app.exit(0);
-
-    def handleNewDelay(self, delay):
-        self.timer.stop();
-        self.timer.start(delay * 60000);
-        print("Setting delay to {} minutes".format(delay));
-
 
 if __name__ == "__main__":
 
@@ -99,16 +35,8 @@ if __name__ == "__main__":
 
         flag = open("installed", "wb+")
         flag.close()
-
-        from PyQt5.QtCore import Q_FLAGS, QTimer
-        from PyQt5.QtGui import QIcon
-        from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMenu, QAction
-
-        from engine import Engine
-        from settings import Settings
-        from settings_model import SettingsModel
-
-        Main().main();
+        from wallmaster import Wallmaster
+        Wallmaster().main()
 
     elif launcher is depresolv.INSTALLED_AND_SATISFIED:
 
@@ -120,4 +48,4 @@ if __name__ == "__main__":
 
         # Prevent CMD window from closing
         while True:
-            time.sleep(1)
+            time.sleep(100)
