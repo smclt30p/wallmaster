@@ -19,6 +19,13 @@ class Main(object):
 
     def main(self):
 
+        # Initialize the stylesheet
+
+        stylesheet = open("stylesheet.css", "r")
+        stylesheet_str = stylesheet.read()
+        stylesheet.close()
+        self.app.setStyleSheet(stylesheet_str)
+
         # Initialize the wallpaper changer engine
 
         self.engine.error.connect(self.handleEngineError)
