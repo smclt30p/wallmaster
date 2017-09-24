@@ -8,3 +8,6 @@ uninstall:
 	rm -rf /usr/share/wallmaster
 	rm /bin/wallmaster
 	rm /usr/share/applications/Wallmaster.desktop
+
+build:
+	pip3 install --user -r requirements.txt

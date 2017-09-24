@@ -1,0 +1,5 @@
+PyQt5
+lxml
+BeautifulSoup4
+pygobject
+requests
