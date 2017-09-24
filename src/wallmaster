@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cd /usr/share/wallmaster
+export PYTHONPATH=$(pwd)
+python3 main.py

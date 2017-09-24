@@ -22,30 +22,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 
-import subprocess
-import sys
-import time
-import depresolv
+from wallmaster import Wallmaster
 
 if __name__ == "__main__":
-
-    launcher = depresolv.launch_main(["PyQt5", "bs4", "lxml", "requests"], posixdeps=["pygobject"])
-
-    if launcher is depresolv.ALL_SATISFIED:
-
-        flag = open("installed", "wb+")
-        flag.close()
-        from wallmaster import Wallmaster
-        Wallmaster().main()
-
-    elif launcher is depresolv.INSTALLED_AND_SATISFIED:
-
-        subprocess.Popen([sys.executable, sys.argv])
-        exit(0)
-
-    elif launcher is depresolv.INSTALL_FAILED:
-        print("Some dependencies failed to install! Please report this!")
-
-        # Prevent CMD window from closing
-        while True:
-            time.sleep(100)
+    Wallmaster().main()
