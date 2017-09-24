@@ -39,7 +39,8 @@ from random import randint
 class Engine(QThread):
 
     error = pyqtSignal(str)
-    WALLHAVEN_SEARCH = "https://alpha.wallhaven.cc/search?q={}&search_image=&categories={}&purity={}&sorting=random&order=desc&ratios=4x3,5x4,16x9,16x10"
+    WALLHAVEN_SEARCH = "https://alpha.wallhaven.cc/search?q={}&search_image=&categories={}&purity={}" \
+                       "&sorting=random&order=desc&ratios=4x3,5x4,16x9,16x10"
 
     def __init__(self):
         super().__init__()
