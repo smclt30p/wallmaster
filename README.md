@@ -20,7 +20,7 @@ __Thanks to mervick for the awesome Dracula theme! Get it [here](https://github.
 
 *The Dracula theme is licensed under the GNU GPL*
 
-__*This project is released under the BSD 2-clause license. See LICENSE.md*__
+__*This project is released under the BSD 2-clause license with theme exception. See LICENSE.md*__
 
 ### How to install (for now)
 

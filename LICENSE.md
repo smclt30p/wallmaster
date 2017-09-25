@@ -21,3 +21,8 @@
  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  POSSIBILITY OF SUCH DAMAGE.
+
+ The files under style/ and some files under images/ are NOT licensed under
+ the BSD 2-Clause license, but they are licensed under the GNU GPL license.
+
+ See the README.md file for more information.
