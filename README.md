@@ -17,6 +17,7 @@ Wallhaven by 33%, and I don't want to do that.
 Windows installers coming soon, as well as Linux packages.
 
 __Thanks to mervick for the awesome Dracula theme! Get it [here](https://github.com/mervick/Qt-Creator-Darcula)__
+
 *The Dracula theme is licensed under the GNU GPL*
 
 __*This project is released under the BSD 2-clause license. See LICENSE.md*__
