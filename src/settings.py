@@ -80,7 +80,7 @@ class Settings(QDialog):
         self.ui.setupUi(self);
 
         self.setWindowTitle("Wallmaster Settings");
-        self.setWindowIcon(QIcon("icon.png"));
+        self.setWindowIcon(QIcon("images/icon.png"));
 
         self.settings = SettingsModel.getSettingsModel();
 
