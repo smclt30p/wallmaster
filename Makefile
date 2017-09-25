@@ -10,4 +10,4 @@ uninstall:
 	rm /usr/share/applications/Wallmaster.desktop
 
 build:
-	pip3 install --user -r requirements.txt
+	pip3 install --user -r requirements.posix.txt
