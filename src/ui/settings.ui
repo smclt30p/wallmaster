@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>278</width>
-    <height>305</height>
+    <height>350</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,83 +15,133 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_4">
    <item>
-    <widget class="QGroupBox" name="interests">
-     <property name="title">
-      <string>Interests</string>
+    <widget class="QTabWidget" name="tabs">
+     <property name="currentIndex">
+      <number>0</number>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="QLineEdit" name="lineEdit"/>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="categories">
-     <property name="title">
-      <string>Categories</string>
+     <property name="tabBarAutoHide">
+      <bool>false</bool>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QCheckBox" name="general">
-        <property name="text">
-         <string>General</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="anime">
-        <property name="text">
-         <string>Anime</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="people">
-        <property name="text">
-         <string>People</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="settings">
-     <property name="title">
-      <string>Settings</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
-      <item>
-       <widget class="QCheckBox" name="nsfw">
-        <property name="styleSheet">
-         <string notr="true">QCheckBox {
+     <widget class="QWidget" name="settings_tab">
+      <attribute name="title">
+       <string>Settings</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QGroupBox" name="interests">
+         <property name="title">
+          <string>Interests</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QLineEdit" name="lineEdit"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="categories">
+         <property name="title">
+          <string>Categories</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QCheckBox" name="general">
+            <property name="text">
+             <string>General</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="anime">
+            <property name="text">
+             <string>Anime</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="people">
+            <property name="text">
+             <string>People</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="settings">
+         <property name="title">
+          <string>Settings</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QCheckBox" name="nsfw">
+            <property name="styleSheet">
+             <string notr="true">QCheckBox {
 	color: red;
 }</string>
-        </property>
-        <property name="text">
-         <string>NSFW</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Delay (minutes)</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QSpinBox" name="spinBox">
-        <property name="minimum">
-         <number>5</number>
-        </property>
-        <property name="maximum">
-         <number>1000</number>
-        </property>
-       </widget>
-      </item>
-     </layout>
+            </property>
+            <property name="text">
+             <string>NSFW</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Delay (minutes)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="spinBox">
+            <property name="minimum">
+             <number>5</number>
+            </property>
+            <property name="maximum">
+             <number>1000</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="about_tab">
+      <attribute name="title">
+       <string>About</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <widget class="QLabel" name="desc">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wallmaster - Dynamic Wallpaper Changer&lt;br/&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Version 1.0&lt;br/&gt;Copyright (C) Ognjen Galić&lt;br/&gt;&lt;br/&gt;Licensed under the BSD 2-Clause license with&lt;br/&gt;theme exception. Theme is licensed under the&lt;br/&gt;GNU GPL.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
    <item>
@@ -119,13 +169,6 @@
     </layout>
    </item>
   </layout>
-  <zorder>close</zorder>
-  <zorder>next</zorder>
-  <zorder>horizontalSpacer</zorder>
-  <zorder>categories</zorder>
-  <zorder>interests</zorder>
-  <zorder>anime</zorder>
-  <zorder>settings</zorder>
  </widget>
  <resources/>
  <connections/>
